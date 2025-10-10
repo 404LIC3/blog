@@ -1,0 +1,16 @@
+<h1>Il blog di Alice</h1>
+
+<div id="create-post">
+  <input type="text" placeholder="Titolo" [(ngModel)]="newPostTitle">
+  <textarea placeholder="Contenuto" [(ngModel)]="newPostContent"></textarea>
+  <button (click)="addPost()">Aggiungi Post</button>
+</div>
+
+<div id="posts">
+  <div *ngFor="let post of posts()">
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+    <button (click)="deletePost(post.id!)">Elimina</button>
+    <hr/>
+  </div>
+</div>
