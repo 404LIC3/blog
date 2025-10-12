@@ -2,8 +2,7 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { API_URL } from './app.config';
 import { FormsModule } from '@angular/forms';
-import {NgForOf} from '@angular/common';
-
+import { CommonModule } from '@angular/common';
 
 interface Post {
   id?: number;
@@ -14,22 +13,26 @@ interface Post {
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormsModule, NgForOf],
+  imports: [ FormsModule, CommonModule],
   templateUrl: './app.html',
   styleUrls: ['./app.css'],
   standalone: true
 })
 export class App {
-  protected readonly title = signal('frontend');
-
   posts = signal<Post[]>([]);
   newPostTitle = signal('');
   newPostContent = signal('');
+
+  showLogin = false;
+  isAdmin = false;
+  username = '';
+  password = '';
 
   constructor() {
     this.loadPosts();
   }
 
+  // CARICAMENTO POST
   async loadPosts() {
     try {
       const res = await fetch(API_URL);
@@ -40,10 +43,37 @@ export class App {
     }
   }
 
+  // LOGIN
+  async login() {
+    if (!this.username || !this.password) return alert('Inserisci username e password');
+
+    try {
+      const res = await fetch(API_URL, {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Basic ' + btoa(`${this.username}:${this.password}`)
+        }
+      });
+
+      if (res.ok) {
+        this.isAdmin = true;
+        this.showLogin = false;
+        alert('Login riuscito! Ora puoi creare/eliminare post.');
+      } else {
+        alert('Credenziali errate');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Errore di login');
+    }
+  }
+
+  // AGGIUNTA POST
   async addPost() {
+    if (!this.isAdmin) return alert('Devi essere admin!');
     if (!this.newPostTitle() || !this.newPostContent()) return;
 
-    const newPost: Post = {
+    const newPost = {
       title: this.newPostTitle(),
       content: this.newPostContent()
     };
@@ -51,9 +81,13 @@ export class App {
     try {
       await fetch(API_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + btoa(`${this.username}:${this.password}`)
+        },
         body: JSON.stringify(newPost)
       });
+
       this.newPostTitle.set('');
       this.newPostContent.set('');
       this.loadPosts();
@@ -62,9 +96,18 @@ export class App {
     }
   }
 
+  // ELIMINA POST
   async deletePost(id: number) {
+    if (!this.isAdmin) return alert('Devi essere admin!');
+
     try {
-      await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+      await fetch(`${API_URL}/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': 'Basic ' + btoa(`${this.username}:${this.password}`)
+        }
+      });
+
       this.loadPosts();
     } catch (err) {
       console.error('Errore eliminazione post', err);

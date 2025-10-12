@@ -1,16 +1,33 @@
 <h1>Il blog di Alice</h1>
 
-<div id="create-post">
+<!-- Bottone in alto a destra -->
+<button class="login-btn-modal" (click)="showLogin = true" style="float:right;">Login</button>
+
+<!-- Modale -->
+<div *ngIf="showLogin" class="modal">
+  <div class="modal-content">
+    <span (click)="showLogin = false" class="close">&times;</span>
+    <h2>Login Admin</h2>
+    <input type="text" placeholder="Username" [(ngModel)]="username">
+    <input type="password" placeholder="Password" [(ngModel)]="password">
+    <!-- Qui chiami la funzione login() -->
+    <button class="login-btn" (click)="login()">Login</button>
+  </div>
+</div>
+
+<!-- Form aggiunta post solo per admin -->
+<div id="create-post" *ngIf="isAdmin">
   <input type="text" placeholder="Titolo" [(ngModel)]="newPostTitle">
   <textarea placeholder="Contenuto" [(ngModel)]="newPostContent"></textarea>
   <button (click)="addPost()">Aggiungi Post</button>
 </div>
 
+<!-- Lista dei post -->
 <div id="posts">
   <div *ngFor="let post of posts()">
     <h2>{{ post.title }}</h2>
     <p>{{ post.content }}</p>
-    <button (click)="deletePost(post.id!)">Elimina</button>
+    <button *ngIf="isAdmin" (click)="deletePost(post.id!)">Elimina</button>
     <hr/>
   </div>
 </div>

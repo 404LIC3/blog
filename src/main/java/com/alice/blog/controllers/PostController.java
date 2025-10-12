@@ -1,4 +1,7 @@
 package com.alice.blog.controllers;
+import org.springframework.security.access.prepost.PreAuthorize;
+
+
 
 import com.alice.blog.entities.Post;
 import com.alice.blog.repositories.PostRepository;
@@ -18,12 +21,13 @@ public class PostController {
         this.repository = repository;
     }
 
-
     @GetMapping
     public List<Post> all() {
         return repository.findAll();
     }
 
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public Post create(@RequestBody Post post) {
         return repository.save(post);
@@ -34,6 +38,7 @@ public class PostController {
         return repository.findById(id).orElseThrow();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         repository.deleteById(id);
