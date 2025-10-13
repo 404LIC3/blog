@@ -1,33 +1,44 @@
-<h1>Il blog di Alice</h1>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+</style>
 
-<!-- Bottone in alto a destra -->
-<button class="login-btn-modal" (click)="showLogin = true" style="float:right;">Login</button>
+<div class="blog-header">
 
-<!-- Modale -->
+  <div class="login-top-left">
+    <a style="opacity: 0" class="text-button-white" (click)="showLogin = true">Login</a>
+  </div>
+
+  <div class="middle-title">
+    <h1 class="m-0" style="color: #000000; font-family: 'Anke', serif;">ALICE's BLOG</h1>
+  </div>
+</div>
+
 <div *ngIf="showLogin" class="modal">
   <div class="modal-content">
-    <span (click)="showLogin = false" class="close">&times;</span>
+    <span class="close" (click)="showLogin = false">&times;</span>
     <h2>Login Admin</h2>
     <input type="text" placeholder="Username" [(ngModel)]="username">
     <input type="password" placeholder="Password" [(ngModel)]="password">
-    <!-- Qui chiami la funzione login() -->
-    <button class="login-btn" (click)="login()">Login</button>
+    <button class="login-btn" (click)="login()">Accedi</button>
   </div>
 </div>
 
+
+
 <!-- Form aggiunta post solo per admin -->
-<div id="create-post" *ngIf="isAdmin">
-  <input type="text" placeholder="Titolo" [(ngModel)]="newPostTitle">
-  <textarea placeholder="Contenuto" [(ngModel)]="newPostContent"></textarea>
-  <button (click)="addPost()">Aggiungi Post</button>
+<div id="create-post" *ngIf="isAdmin" class="mt-3">
+  <input type="text" placeholder="Titolo" [(ngModel)]="newPostTitle" class="form-control mb-2">
+  <textarea placeholder="Contenuto" [(ngModel)]="newPostContent" class="form-control mb-2"></textarea>
+  <button class="btn btn-success" (click)="addPost()">Aggiungi Post</button>
 </div>
 
 <!-- Lista dei post -->
-<div id="posts">
+<div id="posts" class="mt-3">
   <div *ngFor="let post of posts()">
     <h2>{{ post.title }}</h2>
     <p>{{ post.content }}</p>
-    <button *ngIf="isAdmin" (click)="deletePost(post.id!)">Elimina</button>
+    <button *ngIf="isAdmin" class="btn btn-danger btn-sm" (click)="deletePost(post.id!)">Elimina</button>
     <hr/>
   </div>
 </div>
+

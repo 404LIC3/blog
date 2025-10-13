@@ -1,41 +1,45 @@
-/* Reset minimale */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+.blog-header { /*Banner*/
+  background-image: url('https://i.pinimg.com/originals/5e/89/1f/5e891f396db7fb4c5edcdcd57987163d.gif');
+  background-size: cover;
+  background-position: center;
+  min-height: 50px;
+  padding: 1rem;
+  display: flex;/* Configurazione Flexbox per allineare gli elementi verticalmente */
+  flex-direction: column; /* Imposta la direzione in colonna */
+  justify-content: space-between; /* Spinge Login in alto e lascia spazio per il centro */
+  align-items: center; /* Centra l'elemento 'middle-title' orizzontalmente */
+  position: relative; /* Necessario per posizionamento assoluto se preferito */
 }
 
-/* Background globale */
-body {
-  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 40px 20px;
-}
-
-/* Contenitore principale */
-#app-root {
-  width: 100%;
-  max-width: 800px;
-  background: #ffffffdd;
-  border-radius: 25px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-  padding: 30px 40px;
-  backdrop-filter: blur(10px);
-}
-
-/* Titolo principale */
-h1 {
+h1 {/* Titolo principale */
   text-align: center;
   font-size: 3rem;
   font-weight: 800;
-  color: #333;
   margin-bottom: 30px;
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  text-shadow: 2px 2px 8px rgba(150,150,150,0.25);
 }
+
+.middle-title { /* Contenitore per il titolo centrale, garantisce che sia centrato */
+  width: 100%;/* Usa la larghezza completa per mantenere il titolo centrato */
+  text-align: center; /* Centra il testo all'interno del suo contenitore */
+  flex-grow: 1; /* Permette al titolo di occupare lo spazio centrale */
+}
+
+.login-top-left { /* Posiziona il link Login in alto a sinistra */
+  align-self: flex-start;/* Allinea l'elemento a sinistra, ignorando il centering del padre */
+  margin-left: 15px;/* Aggiunge margine per distanziare il link dall'angolo */
+  margin-top: 5px;
+}
+
+.text-button-white { /* link stile login */
+  color: #000000 !important;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.25rem;
+}
+
+
+
 
 /* Form creazione post */
 #create-post {
@@ -48,7 +52,6 @@ h1 {
 #create-post input,
 #create-post textarea {
   padding: 15px 20px;
-  border-radius: 15px;
   border: 2px solid #eee;
   font-size: 1rem;
   outline: none;
@@ -57,30 +60,27 @@ h1 {
 
 #create-post input:focus,
 #create-post textarea:focus {
-  border-color: #ff6a95;
-  box-shadow: 0 5px 20px rgba(255, 106, 149, 0.2);
+  border-color: #c8b9bd;
+  box-shadow: 0 5px 20px rgba(34, 23, 27, 0.3);
 }
 
 #create-post button {
   padding: 15px;
   font-size: 1.1rem;
   font-weight: bold;
-  background: linear-gradient(90deg, #ff6a95, #ff9472);
+  background: #ece8e8;
   border: none;
-  border-radius: 15px;
-  color: #fff;
+  color: #ffffff;
   cursor: pointer;
   transition: 0.3s all;
-  box-shadow: 0 5px 15px rgba(255, 106, 149, 0.3);
 }
 
 #create-post button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(255, 106, 149, 0.4);
+  background: #cac1c1;
 }
 
-/* Lista dei post */
-#posts {
+#posts {/* Lista dei post */
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -90,20 +90,19 @@ h1 {
 #posts div {
   background: #fff;
   padding: 20px 25px;
-  border-radius: 20px;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 0 0 rgb(11, 4, 4);
   transition: 0.3s all;
   position: relative;
 }
 
 #posts div:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+  box-shadow: 0 0 0 rgb(11, 4, 4);
 }
 
 #posts h2 {
   font-size: 1.7rem;
-  color: #ff6a95;
+  color: #292626;
   margin-bottom: 10px;
 }
 
@@ -118,10 +117,9 @@ h1 {
   position: absolute;
   top: 15px;
   right: 15px;
-  background: #ff4b5c;
+  background: #ece8e8;
   border: none;
   padding: 8px 14px;
-  border-radius: 12px;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
@@ -129,35 +127,28 @@ h1 {
 }
 
 #posts button:hover {
-  background: #ff2a3a;
+  background: #cac1c1;
   transform: scale(1.1);
 }
 
 /* Pulsante login moderno */
 .login-btn {
   float: right;
-  padding: 12px 25px;
   margin: 10px;
   font-size: 1rem;
   font-weight: 700;
   color: #fff;
-  background: linear-gradient(135deg, #ff6a95, #6a11cb);
   border: none;
-  border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
 .login-btn:hover {
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
 }
 
 .login-btn:active {
   transform: translateY(0) scale(0.98);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
 /* Modale glassmorphism */
@@ -171,19 +162,18 @@ h1 {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.45);
+  background-color: rgba(0,0,0,0);
   padding: 20px;
   backdrop-filter: blur(4px);
 }
 
 .modal-content {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.0);
   backdrop-filter: blur(20px);
-  border-radius: 25px;
   padding: 30px 25px;
-  width: 100%;
+  width: 75%;
   max-width: 350px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgb(158, 155, 155);
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -197,44 +187,41 @@ h1 {
   right: 20px;
   font-size: 28px;
   font-weight: bold;
-  color: #fff;
+  color: #9e9b9b;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .close:hover {
   transform: rotate(90deg) scale(1.2);
-  color: #ff6a95;
+  color: #000000;
 }
 
-/* Inputs modale */
-.modal-content input {
-  padding: 12px 18px;
-  border-radius: 12px;
-  border: 1px solid #fff3;
+.modal-content input { /* Inputs modale */
+  padding: 10px 3px;
+  border:  solid #fff3;
   outline: none;
-  background: rgba(255,255,255,0.2);
-  color: #fff;
+  background: rgba(255,255,255,0.80);
+  backdrop-filter: blur(5020px);
+  color: #0b0404;
   font-size: 1rem;
   transition: all 0.3s ease;
 }
 
 .modal-content input:focus {
-  border-color: #ff6a95;
-  box-shadow: 0 4px 15px rgba(255,106,149,0.3);
+  border-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 /* Pulsante modale */
 .modal-content button {
-  padding: 12px;
+  padding: 10px;
   font-size: 1rem;
   font-weight: 700;
-  border-radius: 50px;
-  border: none;
   cursor: pointer;
   color: #fff;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  background: linear-gradient(135deg, #eeeeee, #555555);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.50);
   transition: all 0.3s ease;
 }
 
@@ -254,32 +241,4 @@ h1 {
   will-change: transform, box-shadow;
 }
 
-/* Bottone login in alto a destra */
-.login-btn-modal {
-  position: absolute; /* in alto a destra */
-  top: 20px;
-  right: 20px;
-  padding: 12px 25px;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-  background: linear-gradient(135deg, #ff6a95, #6a11cb);
-  border: none;
-  border-radius: 50px; /* pill-shaped */
-  cursor: pointer;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
-  z-index: 10; /* sopra tutto */
-}
-
-.login-btn-modal:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 10px 25px rgba(255,106,149,0.4); /* glow rosa/blu */
-}
-
-.login-btn-modal:active {
-  transform: translateY(0) scale(0.98);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-}
 
