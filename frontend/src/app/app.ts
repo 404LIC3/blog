@@ -1,5 +1,4 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { API_URL } from './app.config';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -19,7 +18,7 @@ interface Post {
   standalone: true
 })
 export class App {
-  posts = signal<Post[]>([]);
+  posts  = signal<Post[]>([]);
   newPostTitle = signal('');
   newPostContent = signal('');
 
@@ -29,8 +28,9 @@ export class App {
   password = '';
 
   constructor() {
-    this.loadPosts();
+    this.loadPosts().catch(err => console.error(err));
   }
+
 
   // CARICAMENTO POST
   async loadPosts() {
@@ -90,11 +90,13 @@ export class App {
 
       this.newPostTitle.set('');
       this.newPostContent.set('');
-      this.loadPosts();
+      await this.loadPosts();
     } catch (err) {
       console.error('Errore creazione post', err);
     }
   }
+
+
 
   // ELIMINA POST
   async deletePost(id: number) {
@@ -108,7 +110,7 @@ export class App {
         }
       });
 
-      this.loadPosts();
+      await this.loadPosts();
     } catch (err) {
       console.error('Errore eliminazione post', err);
     }
