@@ -28,7 +28,7 @@ public class PostController {
 
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping
+    @PostMapping("")
     public Post create(@RequestBody Post post) {
         return repository.save(post);
     }

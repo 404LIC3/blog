@@ -7,6 +7,7 @@ interface Post {
   id?: number;
   title: string;
   content: string;
+  image?:string;
   createdAt?: string;
 }
 
@@ -17,10 +18,14 @@ interface Post {
   styleUrls: ['./app.css'],
   standalone: true
 })
+
 export class App {
   posts  = signal<Post[]>([]);
   newPostTitle = signal('');
   newPostContent = signal('');
+  newPostImage = signal<File | null>(null);
+  searchQuery = signal(''); // Segnale per la barra di ricerca
+
 
   showLogin = false;
   isAdmin = false;
@@ -29,6 +34,16 @@ export class App {
 
   constructor() {
     this.loadPosts().catch(err => console.error(err));
+  }
+
+
+ // Getter per i post filtrati
+  get filteredPosts(): Post[] {
+    const query = this.searchQuery().toLowerCase();
+    return this.posts().filter(post =>
+      post.title.toLowerCase().includes(query) ||
+      post.content.toLowerCase().includes(query)
+    );
   }
 
 
@@ -73,14 +88,22 @@ export class App {
     if (!this.isAdmin) return alert('Devi essere admin!');
     if (!this.newPostTitle() || !this.newPostContent()) return;
 
+    const imageFile = this.newPostImage();
+    let imageBase64: string | null = null;
+
+    if (imageFile) {
+      imageBase64 = await this.convertToBase64(imageFile);
+    }
+
     const newPost = {
       title: this.newPostTitle(),
-      content: this.newPostContent()
+      content: this.newPostContent(),
+      image: imageBase64
     };
 
     try {
       await fetch(API_URL, {
-        method: 'POST',
+        method: 'POST', //GET POST DELETE PUT
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Basic ' + btoa(`${this.username}:${this.password}`)
@@ -88,12 +111,37 @@ export class App {
         body: JSON.stringify(newPost)
       });
 
+      // reset campi
       this.newPostTitle.set('');
       this.newPostContent.set('');
+      this.newPostImage.set(null);
+
       await this.loadPosts();
     } catch (err) {
       console.error('Errore creazione post', err);
     }
+  }
+
+
+
+  //immagine post - anteprima base64
+  onImageSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.newPostImage.set(input.files[0]);
+    } else {
+      this.newPostImage.set(null);
+    }
+  }
+
+
+  convertToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+      reader.readAsDataURL(file);
+    });
   }
 
 

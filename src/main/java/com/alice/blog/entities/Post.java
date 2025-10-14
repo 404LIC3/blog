@@ -1,9 +1,6 @@
 package com.alice.blog.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -16,7 +13,12 @@ public class Post {
     private Long id;
 
     private String title;
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String image;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 

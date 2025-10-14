@@ -2,13 +2,14 @@
   background-image: url('https://i.pinimg.com/originals/5e/89/1f/5e891f396db7fb4c5edcdcd57987163d.gif');
   background-size: cover;
   background-position: center;
-  min-height: 50px;
   padding: 1rem;
+  min-height: 50px;
   display: flex;/* Configurazione Flexbox per allineare gli elementi verticalmente */
   flex-direction: column; /* Imposta la direzione in colonna */
   justify-content: space-between; /* Spinge Login in alto e lascia spazio per il centro */
   align-items: center; /* Centra l'elemento 'middle-title' orizzontalmente */
   position: relative; /* Necessario per posizionamento assoluto se preferito */
+  margin-bottom: 10px;/* distanza dal banner */
 }
 
 h1 {/* Titolo principale */
@@ -48,7 +49,6 @@ h1 {/* Titolo principale */
   gap: 15px;
   margin-bottom: 40px;
 }
-
 #create-post input,
 #create-post textarea {
   padding: 15px 20px;
@@ -57,13 +57,11 @@ h1 {/* Titolo principale */
   outline: none;
   transition: 0.3s all;
 }
-
 #create-post input:focus,
 #create-post textarea:focus {
   border-color: #c8b9bd;
   box-shadow: 0 5px 20px rgba(34, 23, 27, 0.3);
 }
-
 #create-post button {
   padding: 15px;
   font-size: 1.1rem;
@@ -239,6 +237,54 @@ h1 {/* Titolo principale */
 /* Animazioni leggere post + create post */
 #posts div, #create-post button {
   will-change: transform, box-shadow;
+}
+
+/* NAVBAR UTENTE */
+.user-navbar {
+  background-color: #000; /* Sfondo nero */
+  padding: 20px 0; /* Spaziatura verticale */
+  margin-bottom: 40px; /* Distanza dal contenuto sottostante */
+  display: flex;
+  justify-content: center; /* Centra il contenitore */
+  position: relative;
+  z-index: 1;
+}
+
+.user-navbar .search-container {
+  width: 100%;
+  max-width: 600px; /* Circa 6 colonne */
+  display: flex;
+  gap: 10px;
+}
+
+.user-navbar input[type="text"] {
+  flex: 1;
+  padding: 12px 15px;
+  border: 2px solid #333;
+  outline: none;
+  font-size: 1rem;
+  transition: 0.3s all;
+}
+
+.user-navbar input[type="text"]:focus {
+  border-color: #666;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.user-navbar button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+
+.user-navbar button:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px) scale(1.02);
 }
 
 
