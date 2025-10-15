@@ -1,0 +1,53 @@
+<div class="container mt-5">
+
+  <!-- Pulsante Torna alla Home -->
+  <a routerLink="/" class="back-link">
+    ← Torna alla Home
+  </a>
+
+  <!-- Gestione Caricamento -->
+  @if (isLoading()) {
+    <div class="loading-spinner">
+      <div class="spinner"></div>
+      <p>Caricamento dettagli post...</p>
+    </div>
+  }
+  @else if (post()) {
+    <article class="post-detail-card">
+      <!-- Titolo -->
+      <h1 class="post-title">{{ post()!.title }}</h1>
+
+      <!-- Data di Creazione -->
+      @if (post()!.createdAt) {
+        <p class="post-date">Pubblicato il:
+          <time [attr.datetime]="post()!.createdAt | date: 'yyyy-MM-dd'">
+            {{ post()!.createdAt | date: 'dd MMMM yyyy, HH:mm' }}
+          </time>
+        </p>
+      }
+
+      <!-- Immagine Principale -->
+      @if (post()!.image) {
+        <figure class="post-image-container">
+          <img
+            [src]="post()!.image"
+            alt="Immagine di copertina del post: {{ post()!.title }}"
+            class="post-image"
+          />
+        </figure>
+      }
+
+      <!-- Contenuto -->
+      <section class="post-content">
+        <p>{{ post()!.content }}</p>
+      </section>
+
+    </article>
+  }
+  @else {
+    <div class="error-message">
+      <h2>Post non trovato</h2>
+      <p>Siamo spiacenti, il post richiesto non è disponibile o è stato eliminato.</p>
+    </div>
+  }
+</div>

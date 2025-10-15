@@ -9,18 +9,6 @@
   </div>
 </div>
 
-<!-- Navbar ricerca post (solo utenti) -->
-@if (!isAdmin) {
-  <div class="user-navbar">
-    <div class="search-container">
-      <input
-        type="text"
-        placeholder="🔍 Cerca post..."
-        [(ngModel)]="searchQuery"
-      />
-    </div>
-  </div>
-}
 
 <!-- Modale Login Admin -->
 @if (showLogin) {
@@ -57,27 +45,6 @@
     <button class="btn btn-success" (click)="addPost()">Aggiungi Post</button>
   </div>
 }
+<router-outlet></router-outlet>
 
-<!-- Lista di post filtrata -->
-<ng-container>
-  @for (post of filteredPosts; track $index) {
-    <div class="post-item mt-3">
-      <h2>{{ post.title }}</h2>
-      <p>{{ post.content }}</p>
-      @if (post.image) {
-        <img
-          [src]="post.image"
-          alt="Immagine del post"
-          style="max-width: 100%; border-radius: 10px; margin-top: 10px;"
-        >
-      }
-      @if (isAdmin) {
-        <button
-          class="btn btn-danger btn-sm"
-          (click)="deletePost(post.id!)"
-        >Elimina</button>
-      }
-      <hr />
-    </div>
-  }
-</ng-container>
+

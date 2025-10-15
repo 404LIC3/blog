@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { API_URL } from './app.config';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {RouterModule} from '@angular/router';
 
 interface Post {
   id?: number;
@@ -13,7 +14,7 @@ interface Post {
 
 @Component({
   selector: 'app-root',
-  imports: [ FormsModule, CommonModule],
+  imports: [ FormsModule, CommonModule, RouterModule],
   templateUrl: './app.html',
   styleUrls: ['./app.css'],
   standalone: true

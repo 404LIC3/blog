@@ -239,16 +239,7 @@ h1 {/* Titolo principale */
   will-change: transform, box-shadow;
 }
 
-/* NAVBAR UTENTE */
-.user-navbar {
-  background-color: #000; /* Sfondo nero */
-  padding: 20px 0; /* Spaziatura verticale */
-  margin-bottom: 40px; /* Distanza dal contenuto sottostante */
-  display: flex;
-  justify-content: center; /* Centra il contenitore */
-  position: relative;
-  z-index: 1;
-}
+
 
 .user-navbar .search-container {
   width: 100%;
