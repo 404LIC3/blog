@@ -135,7 +135,7 @@ h1 {/* Titolo principale */
   margin: 10px;
   font-size: 1rem;
   font-weight: 700;
-  color: #fff;
+  color: #000;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -199,7 +199,7 @@ h1 {/* Titolo principale */
   padding: 10px 3px;
   border:  solid #fff3;
   outline: none;
-  background: rgba(255,255,255,0.80);
+  background: rgb(255, 255, 255);
   backdrop-filter: blur(5020px);
   color: #0b0404;
   font-size: 1rem;
@@ -238,8 +238,6 @@ h1 {/* Titolo principale */
 #posts div, #create-post button {
   will-change: transform, box-shadow;
 }
-
-
 
 .user-navbar .search-container {
   width: 100%;

@@ -15,10 +15,10 @@
   <div class="modal">
     <div class="modal-content">
       <span class="close" (click)="showLogin = false">&times;</span>
-      <h2>Login Admin</h2>
+      <h2 style="color: #000000; font-family: 'Anke', serif;">Login Admin</h2>
       <input type="text" placeholder="Username" [(ngModel)]="username">
       <input type="password" placeholder="Password" [(ngModel)]="password">
-      <button class="login-btn" (click)="login()">Accedi</button>
+      <button class="login-btn" (click)="login()" style="color: #ffffff; font-family: 'Anke', serif;">Accedi</button>
     </div>
   </div>
 }
@@ -42,9 +42,8 @@
       (change)="onImageSelected($event)"
       class="form-control mb-2"
     >
-    <button class="btn btn-success" (click)="addPost()">Aggiungi Post</button>
+    <button class="btn btn-success" (click)="addPost()" style="color: #ffffff; font-family: 'Anke', serif;">Aggiungi Post</button>
   </div>
 }
 <router-outlet></router-outlet>
-
 

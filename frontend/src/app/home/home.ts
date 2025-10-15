@@ -3,6 +3,7 @@ import {API_URL} from '../app.config';
 import {RouterLink} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {Post} from '../types';
+import {SlicePipe} from '@angular/common';
 
 
 
@@ -11,7 +12,8 @@ import {Post} from '../types';
   selector: 'app-home',
   imports: [
     RouterLink,
-    FormsModule
+    FormsModule,
+    SlicePipe
   ],
   templateUrl: './home.html',
   styleUrl: './home.css'
