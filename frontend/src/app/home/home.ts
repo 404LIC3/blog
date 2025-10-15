@@ -4,6 +4,7 @@ import {RouterLink} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {Post} from '../types';
 import {SlicePipe} from '@angular/common';
+import {AuthService} from '../auth.service';
 
 
 
@@ -22,12 +23,12 @@ export class Home {
   posts  = signal<Post[]>([]);
   searchQuery = signal('');
 
-  isAdmin = true;
-  username = 'admin';
-  password = '123';
-
-  constructor() {
+  constructor(private authService: AuthService) {
     this.loadPosts().catch(err => console.error(err));
+  }
+
+  get isAdmin(): boolean {
+    return this.authService.isAdmin();
   }
 
   // Getter per i post filtrati
@@ -56,14 +57,12 @@ export class Home {
 
   // ELIMINA POST
   async deletePost(id: number) {
-    if (!this.isAdmin) return alert('Devi essere admin!');
+    if (!this.authService.isAdmin()) return alert('Devi essere admin!');
 
     try {
       await fetch(`${API_URL}/${id}`, {
         method: 'DELETE',
-        headers: {
-          'Authorization': 'Basic ' + btoa(`${this.username}:${this.password}`)
-        }
+        headers: this.authService.getAuthHeaders()
       });
 
       await this.loadPosts();

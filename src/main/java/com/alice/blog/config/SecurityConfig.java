@@ -2,6 +2,7 @@ package com.alice.blog.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -33,12 +34,14 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/posts/**").permitAll() // GET liberi
+                        .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll() // GET liberi per tutti
+                        .requestMatchers("/api/posts/**").hasRole("ADMIN") // POST, DELETE, PUT richiedono admin
                         .anyRequest().authenticated()
                 )
-                .httpBasic(Customizer.withDefaults()) // http basic moderno
-                .csrf(csrf -> csrf.disable()); // disabilito CSRF per semplicità Angular
-
+                .httpBasic(Customizer.withDefaults())
+                .csrf(csrf -> csrf.disable())
+                .cors(Customizer.withDefaults()); // attiva CORS
         return http.build();
     }
+
 }
