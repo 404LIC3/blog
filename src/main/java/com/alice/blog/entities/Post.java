@@ -22,5 +22,5 @@ public class Post {
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // getter e setter
+    private String category;
 }

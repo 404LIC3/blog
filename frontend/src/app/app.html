@@ -37,6 +37,12 @@
       [(ngModel)]="newPostContent"
       class="form-control mb-2"
     ></textarea>
+    <select [(ngModel)]="newPostCategory" class="form-control mb-2">
+      <option value="">Seleziona categoria</option>
+      @for (cat of categories; track cat) {
+        <option [value]="cat">{{ cat }}</option>
+      }
+    </select>
     <input
       type="file"
       (change)="onImageSelected($event)"

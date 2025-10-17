@@ -4,4 +4,5 @@ export interface Post {
   content: string;
   image?:string;
   createdAt?: string;
+  category?: string;
 }

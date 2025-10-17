@@ -1,12 +1,20 @@
 <div class="user-navbar">
+  <!-- Colonna sinistra: navbar content / dropdown -->
+  <div class="navbar-content">
+    <select [(ngModel)]="selectedCategory">
+      <option value="">Tutte le categorie</option>
+      @for (cat of categories(); track cat) {
+        <option value="{{cat}}">{{cat}}</option>
+      }
+    </select>
+  </div>
+
   <div class="search-container">
-    <input
-      type="text"
-      placeholder= "Cerca parola chiave..."
-      [(ngModel)]="searchQuery"
-    />
+    <input type="text" placeholder="Cerca parola chiave..." [(ngModel)]="searchQuery" />
   </div>
 </div>
+
+
 
 <ng-container>
   @for (post of filteredPosts; track $index) {
@@ -17,7 +25,7 @@
 
       <!-- tronca il contenuto a 200 caratteri -->
       <p>{{ post.content | slice:0:200 }}{{ post.content.length > 200 ? '...' : '' }}</p>
-
+      <p class="post-category">Categoria: {{ post.category || 'Generale' }}</p>
       <!-- nascondi l'immagine impostando post.image a falsy direttamente nel template -->
       @if (false && post.image) {
         <img
@@ -38,3 +46,4 @@
     </div>
   }
 </ng-container>
+

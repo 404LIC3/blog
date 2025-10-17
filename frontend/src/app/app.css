@@ -40,8 +40,6 @@ h1 {/* Titolo principale */
 }
 
 
-
-
 /* Form creazione post */
 #create-post {
   display: flex;
@@ -66,7 +64,7 @@ h1 {/* Titolo principale */
   padding: 15px;
   font-size: 1.1rem;
   font-weight: bold;
-  background: #ece8e8;
+  background: rgba(34, 23, 27, 0.3);
   border: none;
   color: #ffffff;
   cursor: pointer;
@@ -75,79 +73,9 @@ h1 {/* Titolo principale */
 
 #create-post button:hover {
   transform: translateY(-3px);
-  background: #cac1c1;
+  background: #9e9b9b;
 }
 
-#posts {/* Lista dei post */
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
-
-/* Singolo post */
-#posts div {
-  background: #fff;
-  padding: 20px 25px;
-  box-shadow: 0 0 0 rgb(11, 4, 4);
-  transition: 0.3s all;
-  position: relative;
-}
-
-#posts div:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 0 rgb(11, 4, 4);
-}
-
-#posts h2 {
-  font-size: 1.7rem;
-  color: #292626;
-  margin-bottom: 10px;
-}
-
-#posts p {
-  font-size: 1.1rem;
-  color: #555;
-  line-height: 1.6;
-}
-
-/* Bottone elimina */
-#posts button {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: #ece8e8;
-  border: none;
-  padding: 8px 14px;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s all;
-}
-
-#posts button:hover {
-  background: #cac1c1;
-  transform: scale(1.1);
-}
-
-/* Pulsante login moderno */
-.login-btn {
-  float: right;
-  margin: 10px;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #000;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.login-btn:hover {
-  transform: translateY(-2px) scale(1.05);
-}
-
-.login-btn:active {
-  transform: translateY(0) scale(0.98);
-}
 
 /* Modale glassmorphism */
 .modal {
@@ -179,6 +107,59 @@ h1 {/* Titolo principale */
   animation: fadeIn 0.3s ease-out;
 }
 
+.modal-content input { /* Inputs modale */
+  padding: 10px 3px;
+  border:  solid #fff3;
+  outline: none;
+  background: rgb(255, 255, 255);
+  backdrop-filter: blur(5020px);
+  color: #0b0404;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+
+
+
+
+
+/*login button*/
+.modal-content button {
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: #fff;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Pulsante login moderno */
+.login-btn {
+  float: right;
+  margin: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+.login-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+
+
+
+
+
 .close {
   position: absolute;
   top: 15px;
@@ -194,86 +175,3 @@ h1 {/* Titolo principale */
   transform: rotate(90deg) scale(1.2);
   color: #000000;
 }
-
-.modal-content input { /* Inputs modale */
-  padding: 10px 3px;
-  border:  solid #fff3;
-  outline: none;
-  background: rgb(255, 255, 255);
-  backdrop-filter: blur(5020px);
-  color: #0b0404;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.modal-content input:focus {
-  border-color: #ffffff;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-/* Pulsante modale */
-.modal-content button {
-  padding: 10px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  color: #fff;
-  background: linear-gradient(135deg, #eeeeee, #555555);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.50);
-  transition: all 0.3s ease;
-}
-
-.modal-content button:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
-}
-
-/* Animazioni */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Animazioni leggere post + create post */
-#posts div, #create-post button {
-  will-change: transform, box-shadow;
-}
-
-.user-navbar .search-container {
-  width: 100%;
-  max-width: 600px; /* Circa 6 colonne */
-  display: flex;
-  gap: 10px;
-}
-
-.user-navbar input[type="text"] {
-  flex: 1;
-  padding: 12px 15px;
-  border: 2px solid #333;
-  outline: none;
-  font-size: 1rem;
-  transition: 0.3s all;
-}
-
-.user-navbar input[type="text"]:focus {
-  border-color: #666;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
-}
-
-.user-navbar button {
-  padding: 12px 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  border: none;
-  background-color: #fff;
-  color: #000;
-  cursor: pointer;
-  transition: 0.3s all;
-}
-
-.user-navbar button:hover {
-  background-color: #e0e0e0;
-  transform: translateY(-2px) scale(1.02);
-}
-
-

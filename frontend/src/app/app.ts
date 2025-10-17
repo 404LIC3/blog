@@ -26,13 +26,14 @@ export class App {
   newPostTitle = signal('');
   newPostContent = signal('');
   newPostImage = signal<File | null>(null);
-  searchQuery = signal('');
+  newPostCategory = signal<string>('');
+
+
+  categories = ['Tecnologia', 'Moda', 'Cucina', 'Viaggi', 'Musica'];
   showLogin = false;
 
   username = '';
   password = '';
-
-
 
 
   constructor(private authService: AuthService) {
@@ -43,15 +44,6 @@ export class App {
     return this.authService.isAdmin();
   }
 
-
- // Getter per i post filtrati
-  get filteredPosts(): Post[] {
-    const query = this.searchQuery().toLowerCase();
-    return this.posts().filter(post =>
-      post.title.toLowerCase().includes(query) ||
-      post.content.toLowerCase().includes(query)
-    );
-  }
 
 
   // CARICAMENTO POST
@@ -106,7 +98,8 @@ export class App {
     const newPost = {
       title: this.newPostTitle(),
       content: this.newPostContent(),
-      image: imageBase64
+      image: imageBase64,
+      category: this.newPostCategory() || 'Generale'
     };
 
     try {

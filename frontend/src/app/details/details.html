@@ -17,6 +17,9 @@
       <!-- Titolo -->
       <h1 class="post-title">{{ post()!.title }}</h1>
 
+      <p class="post-category">Categoria: {{ post()!.category || 'Generale' }}</p>
+
+
       <!-- Data di Creazione -->
       @if (post()!.createdAt) {
         <p class="post-date">Pubblicato il:

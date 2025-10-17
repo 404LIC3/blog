@@ -1,10 +1,86 @@
-/* NAVBAR UTENTE */
 .user-navbar {
-  background-color: #000; /* Sfondo nero */
-  padding: 20px 0; /* Spaziatura verticale */
-  margin-bottom: 40px; /* Distanza dal contenuto sottostante */
+  position: relative;           /* riferimento assoluto per search-container */
+  height: 60px;
+  background-color: #000;
+  padding: 10px 20px;
   display: flex;
-  justify-content: center; /* Centra il contenitore */
+  align-items: center;
+}
+
+/* Dropdown a sinistra - stile moderno su sfondo nero */
+.navbar-content select {
+  height: 40px;
+  padding: 0 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: all 0.3s ease;
+  min-width: 150px;
   position: relative;
-  z-index: 1;
+}
+
+/* Hover: leggero effetto glow */
+.navbar-content select:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Freccia personalizzata */
+.navbar-content select::after {
+  content: '▼';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #fff;
+  font-size: 0.7rem;
+}
+
+/* Opzioni del dropdown */
+.navbar-content select option {
+  background-color: #111;
+  color: #fff;
+  padding: 8px 10px;
+}
+
+
+/* Search-container centrato nella navbar */
+.search-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Input con stile simile al select */
+.search-container input {
+  width: 300px;
+  max-width: 90%;
+  height: 40px;
+  padding: 0 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* Hover: effetto glow */
+.search-container input:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Placeholder bianco */
+.search-container input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
 }
